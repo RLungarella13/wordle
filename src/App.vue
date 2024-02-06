@@ -1,33 +1,37 @@
 <template>
   <div class="app">
-    <div class="toast" v-if="displayMessage">
-      <div class="toast-content">
-        {{ messageContent }}
+    <Transition>
+      <div class="toast" v-if="displayMessage">
+        <div class="toast-content">
+          {{ messageContent }}
+        </div>
       </div>
-    </div>
-    <div class="header">
-      WORDLE
-      <hr>
-    </div>
-    <div class="board">
-      <div
-        class="row"
-        :class="{ shake: shakeRowIndex === index }"
-        v-for="(row, index) of board"
-        :key="index"
-      >
+    </Transition>
+    <div class="top">
+      <div class="header">
+        WORDLE
+        <hr />
+      </div>
+      <div class="board">
         <div
-          class="tile"
-          v-for="tile of row"
-          :key="tile.letter"
-          :class="{ 
-            'clicked': tile.letter && !tile.state,
-            revealp: tile.state === LetterState.PRESENT,
-            revealc: tile.state === LetterState.CORRECT,
-            reveala: tile.state === LetterState.ABSENT,
-            }"
+          class="row"
+          :class="{ shake: shakeRowIndex === index }"
+          v-for="(row, index) of board"
+          :key="index"
         >
-          {{ tile.letter }}
+          <div
+            class="tile"
+            v-for="tile of row"
+            :key="tile.letter"
+            :class="{
+              clicked: tile.letter && !tile.state,
+              revealp: tile.state === LetterState.PRESENT,
+              revealc: tile.state === LetterState.CORRECT,
+              reveala: tile.state === LetterState.ABSENT,
+            }"
+          >
+            {{ tile.letter }}
+          </div>
         </div>
       </div>
     </div>
@@ -40,9 +44,9 @@
   import { LetterState } from "./types";
   import { words } from "./words";
   import KeyBoard from "./KeyBoard.vue";
-  
-  const correctAnswer = getNewWord(); 
-  function getNewWord(){
+
+  const correctAnswer = getNewWord();
+  function getNewWord() {
     const wordIndex = Math.floor(Math.random() * words.length);
     return words[wordIndex];
   }
@@ -102,19 +106,19 @@
       const guess = currentRow.value.map((tile) => tile.letter).join("");
       if (!words.includes(guess)) {
         shakeYourBooty();
-        showMessage("Word not in list");
+        showMessage("Word not in list!", 1);
       } else {
         evaluateLetters();
         currentRowIndex.value++;
         if (currentRowIndex.value > 5) {
-          showMessage("You Lost" + correctAnswer);
+          showMessage("You Lost: " + correctAnswer.toUpperCase(), 6);
           allowInput = false;
           return;
         }
       }
     } else {
       shakeYourBooty();
-      showMessage("Parola troppo corta");
+      showMessage("Word too short!", 1);
     }
   }
 
@@ -133,7 +137,7 @@
       }
     });
     if (isCorrectGuess) {
-      showMessage("You won");
+      showMessage("You won", 6);
       allowInput = false;
       return;
     }
@@ -171,13 +175,13 @@
   }
   const displayMessage: Ref<Boolean> = ref(false);
   const messageContent: Ref<String> = ref("");
-  function showMessage(msg: string) {
+  function showMessage(msg: string, timeout: number) {
     console.log(msg);
     displayMessage.value = true;
     messageContent.value = msg;
     setTimeout(() => {
       displayMessage.value = false;
-    }, 1000);
+    }, timeout * 1000);
   }
 
   const shakeRowIndex: Ref<Number> = ref(-1);
@@ -193,11 +197,13 @@
 <style scoped>
   @import "./main.css";
   .app {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
   }
-  .header{
+  .header {
     font-weight: bold;
     font-size: 6vh;
     color: white;
@@ -296,6 +302,16 @@
     padding: 1.5rem 0.5rem;
     z-index: 1;
   }
+  .v-enter-active,
+  .v-leave-active {
+    transition: 0.3s ease-in-out;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
   @keyframes jump {
     from {
       transform: scale(1);
@@ -331,8 +347,14 @@
       transform: translate(-4px);
     }
   }
-  hr{
+  hr {
     margin: 0.4vh;
     border: 0.5px solid #444;
+  }
+  .top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
   }
 </style>

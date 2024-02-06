@@ -3,15 +3,14 @@
   --present: #daac2f;
   --absent: #7b7b7b;
 }
+html{
+  padding: 0px;
+  margin: 0px;
+}
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-  text-align: center;
-  max-width: 500px;
-  margin: 0px auto;
+  margin: 0px;
+  padding: 0px;
   background-color: #111;
 }
 .correct,
