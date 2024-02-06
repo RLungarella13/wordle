@@ -7,6 +7,7 @@
     </div>
     <div class="header">
       WORDLE
+      <hr>
     </div>
     <div class="board">
       <div
@@ -198,9 +199,9 @@
   }
   .header{
     font-weight: bold;
-    font-size: 3rem;
+    font-size: 6vh;
     color: white;
-    margin: 2rem;
+    margin: 2vh;
   }
   .board {
     margin-bottom: 2rem;
@@ -220,7 +221,7 @@
     width: 8vh;
     height: 8vh;
     color: white;
-    font-size: 2.5rem;
+    font-size: 5vh;
     font-weight: bold;
     text-transform: uppercase;
     transition: 0.1s ease-in-out;
@@ -329,5 +330,9 @@
     100% {
       transform: translate(-4px);
     }
+  }
+  hr{
+    margin: 0.4vh;
+    border: 0.5px solid #444;
   }
 </style>

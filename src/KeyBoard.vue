@@ -1,69 +1,91 @@
 <template>
-    <div class="keyboard">
-        <div class="keyboard-rows" v-for="(row, index) in keyboardRows" :key="index">
-            <button class="key" @click="$emit('key', key)" v-for="(key, i) in row" :class="{
-                absent: letterStates?.[key] === LetterState.ABSENT,
-                present: letterStates?.[key] === LetterState.PRESENT,
-                correct: letterStates?.[key] === LetterState.CORRECT,
-                big: key === 'Backspace' || key === 'Enter',
-            }" :key="i">
-                {{ key }}
-            </button>
+  <div class="keyboard">
+    <div class="keyboard-rows" v-for="(row, index) in keyboardRows" :key="index">
+      <button
+        @click="$emit('key', key)"
+        v-for="(key, i) in row"
+        :class="{
+          absent: letterStates?.[key] === LetterState.ABSENT,
+          present: letterStates?.[key] === LetterState.PRESENT,
+          correct: letterStates?.[key] === LetterState.CORRECT,
+          big: key === 'Backspace' || key === 'Enter',
+        }"
+        :key="i"
+      >
+        <div v-if="key !== 'Backspace'">
+          {{ key }}
         </div>
+        <div class="icon" v-else>
+          <img src="./icons/backspace.svg" alt="" />
+        </div>
+      </button>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { LetterState } from "./types";
+  import { LetterState } from "./types";
 
-defineProps({
+  defineProps({
     letterStates: Object as () => Record<string, LetterState>,
     prova: Number,
-});
-defineEmits<{
+  });
+  defineEmits<{
     (e: "key", key: string): void;
-}>();
-const keyboardRows = [
+  }>();
+  const keyboardRows = [
     "qwertyuiop".split(""),
     "asdfghjkl".split(""),
     ["Enter", ..."zxcvbnm".split(""), "Backspace"],
-];
+  ];
 </script>
 
 <style scoped>
-.keyboard-rows {
+  .keyboard-rows {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
     font-weight: bold;
-}
-
-button {
-    width: 3rem;
-    height: 3rem;
+  }
+  button {
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
-    font-size: 1.2rem;
-    margin: 0.1rem;
+    padding: 20px;
+    font-size: 20px;
+    margin: 1px;
     border: 0px;
     font-weight: bold;
     text-transform: uppercase;
+    color: #333;
     background-color: #ddd;
-}
+  }
 
-button:hover {
+  button:hover {
     background-color: #aaa;
-}
+  }
 
-button:active {
+  button:active {
     background-color: #ddd;
-}
-
-.big {
+  }
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .big {
     width: auto;
-}
+  }
+  @media screen and (max-width: 700px) {
+    button {
+      font-size: 3vw;
+      padding: 3vw;
+      width: 8vw;
+      height: 8vw;
+    }
+  }
 </style>
