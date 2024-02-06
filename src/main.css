@@ -1,0 +1,30 @@
+* {
+  --correct: #177924;
+  --present: #daac2f;
+  --absent: #7b7b7b;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+  max-width: 500px;
+  margin: 0px auto;
+  background-color: #111;
+}
+.correct,
+.present,
+.absent {
+  color: white !important;
+}
+.absent {
+  background-color: var(--absent) !important;
+}
+.present {
+  background-color: var(--present) !important;
+}
+.correct {
+  background-color: var(--correct) !important;
+}
