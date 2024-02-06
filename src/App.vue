@@ -39,8 +39,13 @@
   import { LetterState } from "./types";
   import { words } from "./words";
   import KeyBoard from "./KeyBoard.vue";
+  
+  const correctAnswer = getNewWord(); 
+  function getNewWord(){
+    const wordIndex = Math.floor(Math.random() * words.length);
+    return words[wordIndex];
+  }
   const number = ref(0);
-  const correctAnswer = "tiamo";
   const letterStates: Ref<Record<string, LetterState>> = ref({});
 
   //BoardProps
@@ -101,7 +106,7 @@
         evaluateLetters();
         currentRowIndex.value++;
         if (currentRowIndex.value > 5) {
-          showMessage("You Lost");
+          showMessage("You Lost" + correctAnswer);
           allowInput = false;
           return;
         }
@@ -212,8 +217,8 @@
     background-color: #111;
     border: 1px solid #444;
     margin: 0.2rem;
-    width: 3.8rem;
-    height: 3.8rem;
+    width: 8vh;
+    height: 8vh;
     color: white;
     font-size: 2.5rem;
     font-weight: bold;

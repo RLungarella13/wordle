@@ -1,10 +1,4 @@
-export const words = [
-    "tiamo",
-    "tiara",
-    "acqua",
-    "acido",
-    "acini",
-    "miele",
-    "atomo",
-]
-  
+export const words =
+    [
+        "volta", "parte", "tempo", "donna", "paese", "mondo", "padre", "punto", "stato", "città", "notte", "acqua", "amico", "fatto", "gente", "amore", "forza", "testa", "piede", "senso", "opera", "festa", "gioco", "prova", "fiore", "fuoco", "vista", "porta", "sogno", "isola", "mente", "causa", "volto", "dente", "gusto", "ferro", "punta", "regno", "epoca", "corsa", "massa", "madre", "paura", "cuore", "fondo", "posto", "campo", "cielo", "letto", "conto", "corpo", "morte", "forma", "resto", "legge", "libro", "resto", "luogo", "segno", "mezzo", "colpa", "scena", "mamma", "caffè", "pezzo", "monte", "treno", "scopo", "carne", "scala", "gamba", "gioia", "gesto", "ponte", "frase", "bosco", "esame", "costa", "prato", "valle", "odore", "crisi", "gatto", "pietà", "spesa", "aiuto", "animo", "pelle", "abito", "corso", "piano", "bocca", "anima", "passo", "colpo", "ombra", "vento", "linea", "carta", "fiume", "lotta", "villa", "serie", "grado", "onore", "metro", "collo", "poeta", "croce", "folla", "messa", "sonno", "porto", "latte", "bagno"
+    ]
