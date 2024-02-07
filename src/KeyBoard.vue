@@ -84,10 +84,10 @@
     align-items: center;
     justify-content: center;
   }
-  .backspace img{
+  .backspace img {
     width: 3vh;
   }
-  .enter{
+  .enter {
     font-size: 2vh;
     padding: 0 20px;
   }
@@ -97,7 +97,7 @@
   .spacer {
     width: 4vw;
   }
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     .keyboard {
       width: 100%;
     }
