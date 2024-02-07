@@ -1,6 +1,7 @@
 <template>
   <div class="keyboard">
     <div class="keyboard-rows" v-for="(row, index) in keyboardRows" :key="index">
+      <div class="spacer" v-if="index === 1"></div>
       <button
         @click="$emit('key', key)"
         v-for="(key, i) in row"
@@ -9,16 +10,18 @@
           present: letterStates?.[key] === LetterState.PRESENT,
           correct: letterStates?.[key] === LetterState.CORRECT,
           big: key === 'Backspace' || key === 'Enter',
+          enter: key === 'Enter',
         }"
         :key="i"
       >
         <div v-if="key !== 'Backspace'">
           {{ key }}
         </div>
-        <div class="icon" v-else>
+        <div class="backspace" v-else>
           <img src="./icons/backspace.svg" alt="" />
         </div>
       </button>
+      <div class="spacer" v-if="index === 1"></div>
     </div>
   </div>
 </template>
@@ -41,6 +44,9 @@
 </script>
 
 <style scoped>
+  .keyboard {
+    width: 40%;
+  }
   .keyboard-rows {
     display: flex;
     flex-direction: row;
@@ -48,16 +54,17 @@
     justify-content: center;
     text-transform: uppercase;
     font-weight: bold;
+    margin-bottom: 0.3vh;
   }
   button {
-    width: 60px;
-    height: 60px;
+    height: 8vh;
+    width: 8vw;
+    font-size: 3.2vh;
+    margin: 0.2vh;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    font-size: 20px;
-    margin: 1px;
     border: 0px;
     font-weight: bold;
     text-transform: uppercase;
@@ -72,20 +79,27 @@
   button:active {
     background-color: #ddd;
   }
-  .icon {
+  .backspace {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .big {
-    width: auto;
+  .backspace img{
+    width: 3vh;
   }
-  @media screen and (max-width: 700px) {
-    button {
-      font-size: 3vw;
-      padding: 3vw;
-      width: 8vw;
-      height: 8vw;
+  .enter{
+    font-size: 2vh;
+    padding: 0 20px;
+  }
+  .big {
+    width: 12vw;
+  }
+  .spacer {
+    width: 4vw;
+  }
+  @media screen and (max-width: 600px){
+    .keyboard {
+      width: 100%;
     }
   }
 </style>

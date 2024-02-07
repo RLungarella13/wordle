@@ -7,31 +7,29 @@
         </div>
       </div>
     </Transition>
-    <div class="top">
-      <div class="header">
-        WORDLE
-        <hr />
-      </div>
-      <div class="board">
+    <div class="header">
+      WORDLE
+      <hr />
+    </div>
+    <div class="board">
+      <div
+        class="row"
+        :class="{ shake: shakeRowIndex === index }"
+        v-for="(row, index) of board"
+        :key="index"
+      >
         <div
-          class="row"
-          :class="{ shake: shakeRowIndex === index }"
-          v-for="(row, index) of board"
-          :key="index"
+          class="tile"
+          v-for="tile of row"
+          :key="tile.letter"
+          :class="{
+            clicked: tile.letter && !tile.state,
+            revealp: tile.state === LetterState.PRESENT,
+            revealc: tile.state === LetterState.CORRECT,
+            reveala: tile.state === LetterState.ABSENT,
+          }"
         >
-          <div
-            class="tile"
-            v-for="tile of row"
-            :key="tile.letter"
-            :class="{
-              clicked: tile.letter && !tile.state,
-              revealp: tile.state === LetterState.PRESENT,
-              revealc: tile.state === LetterState.CORRECT,
-              reveala: tile.state === LetterState.ABSENT,
-            }"
-          >
-            {{ tile.letter }}
-          </div>
+          {{ tile.letter }}
         </div>
       </div>
     </div>
@@ -197,7 +195,6 @@
 <style scoped>
   @import "./main.css";
   .app {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -205,12 +202,12 @@
   }
   .header {
     font-weight: bold;
-    font-size: 6vh;
+    font-size: 4vh;
     color: white;
     margin: 2vh;
   }
   .board {
-    margin-bottom: 2rem;
+    margin-bottom: 2vh;
   }
   .row {
     display: flex;
@@ -223,7 +220,7 @@
     align-items: center;
     background-color: #111;
     border: 1px solid #444;
-    margin: 0.2rem;
+    margin: 0.3vh;
     width: 8vh;
     height: 8vh;
     color: white;
@@ -294,6 +291,7 @@
     margin-left: auto;
     margin-right: auto;
     position: absolute;
+    text-align: center;
 
     background-color: white;
     color: black;
@@ -301,6 +299,7 @@
     border-radius: 20px;
     padding: 1.5rem 0.5rem;
     z-index: 1;
+    box-shadow: #111 0px 0px 20px;
   }
   .v-enter-active,
   .v-leave-active {
@@ -350,11 +349,5 @@
   hr {
     margin: 0.4vh;
     border: 0.5px solid #444;
-  }
-  .top{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
   }
 </style>
