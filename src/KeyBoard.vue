@@ -1,6 +1,6 @@
 <template>
-  <div class="keyboard">
-    <div class="keyboard-rows" v-for="(row, index) in keyboardRows" :key="index">
+  <div id="keyboard">
+    <div class="row" v-for="(row, index) in keyboardRows" :key="index">
       <div class="spacer" v-if="index === 1"></div>
       <button
         @click="$emit('key', key)"
@@ -44,62 +44,41 @@
 </script>
 
 <style scoped>
-  .keyboard {
-    width: 40%;
+  #keyboard {
+    margin: 30px 8px 0;
+    user-select: none;
   }
-  .keyboard-rows {
+  .row {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-bottom: 0.3vh;
-  }
-  button {
-    height: 8vh;
-    width: 8vw;
-    font-size: 3.2vh;
-    margin: 0.2vh;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #333;
-    background-color: #ddd;
-  }
-
-  button:hover {
-    background-color: #aaa;
-  }
-
-  button:active {
-    background-color: #ddd;
-  }
-  .backspace {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .backspace img {
-    width: 3vh;
-  }
-  .enter {
-    font-size: 2vh;
-    padding: 0 20px;
-  }
-  .big {
-    width: 12vw;
+    width: 100%;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
   }
   .spacer {
-    width: 4vw;
+    flex: 0.5;
   }
-  @media screen and (max-width: 600px) {
-    .keyboard {
-      width: 100%;
-    }
+  button {
+    font-family: inherit;
+    font-weight: bold;
+    border: 0;
+    padding: 0;
+    margin: 0 6px 0 0;
+    height: 58px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #d3d6da;
+    color: #444;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+  }
+  button:hover {
+    background-color: #c1c4c8;
+  }
+  button.big {
+    flex: 1.5;
   }
 </style>

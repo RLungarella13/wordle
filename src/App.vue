@@ -11,7 +11,7 @@
       WORDLE
       <hr />
     </div>
-    <div class="board">
+    <div id="board">
       <div
         class="row"
         :class="{ shake: shakeRowIndex === index }"
@@ -194,11 +194,16 @@
 
 <style scoped>
   @import "./main.css";
-  .app {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  #board {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    --height: min(420px, calc(var(--vh, 100vh) - 310px));
+    height: var(--height);
+    width: min(350px, calc(var(--height) / 6 * 5));
+    margin: 0px auto;
   }
   .header {
     font-weight: bold;
@@ -206,28 +211,22 @@
     color: white;
     margin: 2vh;
   }
-  .board {
-    margin-bottom: 2vh;
-  }
   .row {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
   }
   .tile {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: #111;
     border: 1px solid #444;
-    margin: 0.3vh;
-    width: 8vh;
-    height: 8vh;
     color: white;
-    font-size: 5vh;
     font-weight: bold;
     text-transform: uppercase;
     transition: 0.1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
   }
   .clicked {
     border: 1px solid #888;
@@ -284,20 +283,17 @@
     }
   }
   .toast {
+    position: absolute;
     left: 0;
     right: 0;
-    top: 50%;
-    width: 15%;
+    width: 200px;
     margin-left: auto;
     margin-right: auto;
-    position: absolute;
-    text-align: center;
-
     background-color: white;
     color: black;
     font-weight: bold;
     border-radius: 20px;
-    padding: 1.5rem 0.5rem;
+    padding: 1.5rem 2rem;
     z-index: 1;
     box-shadow: #111 0px 0px 20px;
   }
@@ -349,5 +345,10 @@
   hr {
     margin: 0.4vh;
     border: 0.5px solid #444;
+  }
+  @media (max-height: 680px) {
+    .tile {
+      font-size: 2vh;
+    }
   }
 </style>

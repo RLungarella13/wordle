@@ -11,6 +11,9 @@ body {
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   margin: 0px;
   padding: 0px;
+  max-width: 500px;
+  text-align: center;
+  margin: 0px auto;
   background-color: #111;
 }
 .correct,
